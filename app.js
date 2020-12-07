@@ -1,14 +1,30 @@
-const http = require('http');
-const server = http.createServer((req, res) => {
-  console.log(req.url, req.method);
-  res.write('1');
-  res.write('2<br></br>');
-  res.write('<h1>3</h1>');
-  res.write('');
-  res.write('5');
-  res.write('6');
-  res.end('hello node');
+const express = require('express');
+
+const app = express();
+
+app.get('/', (req, res) => {
+  res.send('hello express');
 });
-server.listen(3065, () => {
+app.get('/api', (req, res) => {
+  res.send('hello api');
+});
+app.get('/api/posts', (req, res) => {
+  res.json([
+    {
+      id: 1,
+      content: 'hello',
+    },
+    {
+      id: 2,
+      content: 'hello2',
+    },
+    {
+      id: 3,
+      content: 'hello3',
+    },
+  ]);
+});
+
+app.listen(3065, () => {
   console.log('server running');
 });
